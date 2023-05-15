@@ -13,8 +13,10 @@ const randomTime = () => {
 
 
 app.use("/", (req, res) => {
-    res.json({message : "Hello world",
-'randomTime': {randomTime}})
+    res.json({
+        message : "Hello world",
+        randomTime: {randomTime}
+    })
 })
 
 app.listen(9000, () =>{
