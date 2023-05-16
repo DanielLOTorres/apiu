@@ -49,12 +49,13 @@ setInterval(alteraRazao, 1 * 3 * 1000);
 
 app.use(rts())
 
-app.use("/", async (req, res) => {
+app.get("/", async (req, res) => {
   res.send(data)
 });
 
-app.post('/', (req, res) => {
-  res.send('POST request to the homepage')
+app.post('/reset', (req, res) => {
+  id=0
+  res.json({message: 'Indice resetado'})
 })
 
 app.listen(9000, () => {
