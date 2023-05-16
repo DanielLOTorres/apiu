@@ -1,7 +1,8 @@
 import express from "express";
 import axios from "axios";
-var cors = require('cors')
+import cors from 'cors'
 
+const rts = cors
 const app = express();
 const port = 9000;
 const url = "https://gift-repo-eurawdqtt-daniellotorres.vercel.app/razoes";
@@ -46,7 +47,7 @@ async function alteraRazao() {
 
 setInterval(alteraRazao, 1 * 3 * 1000);
 
-app.use(cors())
+app.use(rts())
 
 app.use("/", async (req, res) => {
   res.send(data)
@@ -55,4 +56,3 @@ app.use("/", async (req, res) => {
 app.listen(9000, () => {
   console.log(`Server is running on port ${port}`);
 });
-
