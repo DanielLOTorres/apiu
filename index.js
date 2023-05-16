@@ -43,7 +43,7 @@ async function alteraRazao() {
   data = montaMensagem(await buscaDados())
 }
 
-setInterval(alteraRazao, 1 * 3 * 1000);
+setInterval(alteraRazao, 1 * 1 * 1000);
 
 
 app.use("/", async (req, res) => {
