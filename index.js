@@ -1,50 +1,53 @@
 import express from "express";
 import axios from "axios";
-import cron from 'node-cron'
 
 const app = express();
 const port = 9000;
 const url = "https://gift-repo-eurawdqtt-daniellotorres.vercel.app/razoes";
 var id = 0;
 let usedIds = [];
-let data = ''
-let a = ''
-
-// const geraHora = () => {
-//   geraId();
-//   const minutes = Math.floor(Math.random() * 60);
-//   a = `${minutes} * * * * * *`
-//   return a;
-// };
+let data = {}
 
 const geraId = () => {
-  id = Math.floor(Math.random() * 5);
-  id === 0 ? id++ : id
-  while (!usedIds.indexOf(id)) {
-    id = Math.floor(Math.random() * 5);
-    id === 0 ? id++ : id
-  }
-  usedIds.push(id);
+  // id = Math.floor(Math.random() * 5);
+  // id === 0 ? id++ : id
+  // while (!usedIds.indexOf(id)) {
+  //   id = Math.floor(Math.random() * 5);
+  //   id === 0 ? id++ : id
+  // }
+  // usedIds.push(id);
+  id < 12 ? id++ : id
+  return id
 };
 
 const buscaDados = async() => {
+    let retorno = {}
     await axios({
         method: "get",
         url: url+'/'+id,
       }).then(function (response) {
-        console.log(response.data)
-        return response.data
+        retorno = response.data
       });
+    return retorno
 }
 
-app.use("/", (req, res) => {
+const montaMensagem = (dadoBruto) =>{
+  return {
+    id: dadoBruto.id,
+    texto: dadoBruto.texto
+  };
+}
+
+async function alteraRazao() {
   geraId()
-  let a = buscaDados()
-  res.json({
-    message: "Hello world",
-    randomTime: a,
-    data: a
-  });
+  data = montaMensagem(await buscaDados())
+}
+
+setInterval(alteraRazao, 1 * 3 * 1000);
+
+
+app.use("/", async (req, res) => {
+  res.send(data)
 });
 
 app.listen(9000, () => {
