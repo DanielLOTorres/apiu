@@ -53,6 +53,10 @@ app.use("/", async (req, res) => {
   res.send(data)
 });
 
+app.post('/', (req, res) => {
+  res.send('POST request to the homepage')
+})
+
 app.listen(9000, () => {
   console.log(`Server is running on port ${port}`);
 });
