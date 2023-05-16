@@ -1,5 +1,6 @@
 import express from "express";
 import axios from "axios";
+var cors = require('cors')
 
 const app = express();
 const port = 9000;
@@ -43,8 +44,9 @@ async function alteraRazao() {
   data = montaMensagem(await buscaDados())
 }
 
-setInterval(alteraRazao, 1 * 1 * 1000);
+setInterval(alteraRazao, 1 * 3 * 1000);
 
+app.use(cors())
 
 app.use("/", async (req, res) => {
   res.send(data)
@@ -53,3 +55,4 @@ app.use("/", async (req, res) => {
 app.listen(9000, () => {
   console.log(`Server is running on port ${port}`);
 });
+
