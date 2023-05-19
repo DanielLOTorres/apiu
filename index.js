@@ -10,16 +10,17 @@ var id = 0;
 let usedIds = [];
 let data = {}
 
-const geraId = () => {
-  // id = Math.floor(Math.random() * 5);
-  // id === 0 ? id++ : id
-  // while (!usedIds.indexOf(id)) {
-  //   id = Math.floor(Math.random() * 5);
-  //   id === 0 ? id++ : id
-  // }
-  // usedIds.push(id);
-  id < 12 ? id++ : id
-  return id
+const geraId = () => { 
+  if(usedIds.length < 12){
+    id = Math.floor(Math.random() * 12); 
+    id === 0 ? id++ : id
+    while (usedIds.indexOf(id) !== -1) {
+      id = Math.floor(Math.random() * 12);
+      id === 0 ? id++ : id
+    }
+    usedIds.push(id);
+    return id
+  }
 };
 
 const buscaDados = async() => {
@@ -35,17 +36,19 @@ const buscaDados = async() => {
 
 const montaMensagem = (dadoBruto) =>{
   return {
-    id: dadoBruto.id,
-    texto: dadoBruto.texto
+    Num: dadoBruto.id,
+    Reason: dadoBruto.texto
   };
 }
 
 async function alteraRazao() {
   geraId()
   data = montaMensagem(await buscaDados())
+  console.log(data)
 }
 
-setInterval(alteraRazao, 1 * 3 * 1000);
+setInterval(alteraRazao, 60 * 1000);
+
 
 app.use(rts())
 
