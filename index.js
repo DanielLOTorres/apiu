@@ -11,7 +11,7 @@ let usedIds = [];
 let data = {}
 
 const geraId = () => { 
-  if(usedIds.length < 7){
+  if(usedIds.length < 6){
     id = Math.floor(Math.random() * 6); 
     id === 0 ? id++ : id
     while (usedIds.indexOf(id) !== -1) {
@@ -20,8 +20,14 @@ const geraId = () => {
     }
     usedIds.push(id);
     return id
+  }else{
+    usedIds = []
+    id = Math.floor(Math.random() * 6); 
+    id === 0 ? id++ : id
+    usedIds.push(id);
+    return id
   }
-  return id
+  
 };
 
 const buscaDados = async() => {
