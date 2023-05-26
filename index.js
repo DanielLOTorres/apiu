@@ -83,7 +83,7 @@ app.get("/", async (req, res) => {
   res.send(data)
 });
 
-app.post('/email', (req, res) =>{
+app.get('/email', (req, res) =>{
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
       console.log(error);
