@@ -78,12 +78,13 @@ setInterval(alteraNoticia, 3 * 60 * 1000);
 
 
 app.use(rts())
+app.disable('etag');
 
 app.get("/", async (req, res) => {
   res.send(data)
 });
 
-app.get('/email', (req, res) =>{
+app.post('/email', (req, res) =>{
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
       console.log(error);
